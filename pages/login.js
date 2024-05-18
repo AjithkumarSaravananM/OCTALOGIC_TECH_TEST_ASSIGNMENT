@@ -17,12 +17,24 @@ exports.LoginPage = class LoginPage {
         this.listButton =page.getByRole('button', { name: 'list' });
         this.search_button =page.getByPlaceholder('Search customer or order');
  
+        this.jobButton = page.getByRole('button', { name: 'job' });
+        this.job_listButton = page.getByRole('button', { name: 'list' });
+
+        this.filter = page.getByRole('button', { name: 'Filters' });
+        this.click_jobfiled = page.getByRole('region').getByText('On Demand');
+        this.closeButton = page.getByRole('button').nth(1);
+
     }
 
     async gotoLoginPage() {
-        await this.page.goto('https://minimals.cc/');
-        await this.page.getByRole('link', { name: 'Login' }).click();
-    }
+        try {
+          await this.page.goto('https://minimals.cc/', { waitUntil: 'load'});
+          await this.page.getByRole('link', { name: 'Login' }).click();
+        } catch (error) {
+          console.error('Error navigating to login page:', error);
+          throw error;
+        }
+      }
 
     async login(userEmail, userPassword) {
         await this.userEmailTextbox.fill(userEmail);
@@ -40,4 +52,14 @@ exports.LoginPage = class LoginPage {
         await this.listButton.click();
         await this.search_button.click();
      }
+
+     async Job_search_Filter() {
+        await this.jobButton.click();
+        await this.job_listButton.click();
+        await this.filter.click();
+        await this.click_jobfiled.click();
+        await this.closeButton.click();
+     }
+
+
 }
