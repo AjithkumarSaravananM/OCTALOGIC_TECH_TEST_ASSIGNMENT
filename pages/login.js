@@ -12,6 +12,11 @@ exports.LoginPage = class LoginPage {
 
         this.accountButton = page.getByRole('button', { name: 'account' });
         this.billingTab = page.getByRole('tab', { name: 'Billing' });
+
+        this.orderButton =page.getByRole('button', { name: 'order' });
+        this.listButton =page.getByRole('button', { name: 'list' });
+        this.search_button =page.getByPlaceholder('Search customer or order');
+ 
     }
 
     async gotoLoginPage() {
@@ -30,4 +35,9 @@ exports.LoginPage = class LoginPage {
         await this.accountButton.click();
         await this.billingTab.click();
     }
+    async List_search() {
+        await this.orderButton.click();
+        await this.listButton.click();
+        await this.search_button.click();
+     }
 }
