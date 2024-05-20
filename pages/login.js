@@ -24,7 +24,13 @@ exports.LoginPage = class LoginPage {
         this.click_jobfiled = page.getByRole('region').getByText('On Demand');
         this.closeButton = page.getByRole('button').nth(1);
 
-    }
+        this.chatButton = page.getByRole('button', { name: 'chat' })
+        this.chat_search = page.getByPlaceholder('Search contacts...'); 
+
+
+        this.file_manager = page.getByRole('button', { name: 'File Manager' });
+    
+    }    
 
     async gotoLoginPage() {
         try {
@@ -61,5 +67,12 @@ exports.LoginPage = class LoginPage {
         await this.closeButton.click();
      }
 
+     async chat(){
+        await this.chatButton.click();
+     }
+
+     async delete(){
+        await this.file_manager.click();
+     }
 
 }
